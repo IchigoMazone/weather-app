@@ -1,15 +1,17 @@
-# App dự báo thời tiết của IchigoMazone
+### App dự báo thời tiết của IchigoMazone
 
-`Ngôn ngữ lập trình :`
+***
 
-- `Dart`
-- `JavaScript`
+**Ngôn ngữ lập trình**
 
-`Framework :`
+- Dart
+- JavaScript
 
-- `Flutter Dart`
-- `NodeJs + Express JavaScript`
+**Framework**
 
+- Flutter
+- NodeJs + ExpressJs
 
+***
 
-`Ngày khởi tạo : 22:00:00 23/10/2025.`
+##### Ngày khởi tạo : 22:00:00 23/10/2025.
