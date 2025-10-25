@@ -1,0 +1,86 @@
+{
+    "dia_diem": {
+        "thanh_pho": "Hanoi",
+        "quoc_gia": "VN",
+        "vi_do": 21.0843,
+        "kinh_do": 108.123
+    },
+    "thoi_tiet_hien_tai": {
+        "nhiet_do": 22,
+        "don_vi": "do C",
+        "do_am": 75,
+        "ap_suat": 1013,
+        "nhiet_do_cao_nhat": 28,
+        "nhiet_dp_thap_nhat": 22,
+        "chi_so_uv": 7,
+        "nhiet_do_cam_giac": 20,
+        "gio": {
+            "toc_do": 5.2,
+            "don_vi": "m/s",
+            "huong": "Dong Bac"
+        },
+        "do_che_phu_may": 40,
+        "mo_ta_thoi_tiet": "Se se lanh",
+        "mat_troi_moc": "2025-10-23T05:45:00+07:00",
+        "mac_troi_lan": "2025-10-23T17:30:00+07:00"
+    },
+    "du_bao_5_ngay": [
+        {
+            "ngay": "2025-10-23",
+            "nhiet_do_cao_nhat": 30,
+            "nhiet_dp_thap_nhat": 27,
+            "mo_ta_thoi_tiet": "Se se lanh"
+        },
+        {
+            "ngay": "2025-10-24",
+            "nhiet_do_cao_nhat": 30,
+            "nhiet_dp_thap_nhat": 27,
+            "mo_ta_thoi_tiet": "Se se lanh"
+        },
+        {
+            "ngay": "2025-10-25",
+            "nhiet_do_cao_nhat": 30,
+            "nhiet_dp_thap_nhat": 27,
+            "mo_ta_thoi_tiet": "Se se lanh"
+        },
+        {
+            "ngay": "2025-10-26",
+            "nhiet_do_cao_nhat": 30,
+            "nhiet_dp_thap_nhat": 27,
+            "mo_ta_thoi_tiet": "Se se lanh"
+        },
+        {
+            "ngay": "2025-10-27",
+            "nhiet_do_cao_nhat": 30,
+            "nhiet_dp_thap_nhat": 27,
+            "mo_ta_thoi_tiet": "Se se lanh"
+        }
+    ],
+    "du_bao_24_gio": [
+        { "thoi_gian": "2025-10-24T08:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T09:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T10:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T11:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T12:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T13:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T14:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T15:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T16:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T17:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T18:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T19:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T20:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T21:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T22:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T23:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T24:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T01:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T02:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T03:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T04:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T05:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T06:00:00+07:00", "nhiet_do_cam_giac": 20 },
+        { "thoi_gian": "2025-10-24T07:00:00+07:00", "nhiet_do_cam_giac": 20 }
+    ],
+    "thoi_gian_lay_du_lieu": "2025-10-23T10:00:00+07:00"
+}

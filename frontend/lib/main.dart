@@ -1,122 +1,189 @@
+
 import 'package:flutter/material.dart';
+import 'package:frontend/services/weather_service.dart';
+import 'package:frontend/models/weather.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const WeatherApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class WeatherApp extends StatelessWidget {
+  const WeatherApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Weather App',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        primarySwatch: Colors.blue,
+        useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
+      home: const WeatherScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+class WeatherScreen extends StatefulWidget {
+  const WeatherScreen({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _WeatherScreenState createState() => _WeatherScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _WeatherScreenState extends State<WeatherScreen> {
+  final WeatherService _weatherService = WeatherService();
+  Weather? _weather;
+  String _errorMessage = '';
+  final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _latController = TextEditingController();
+  final TextEditingController _lonController = TextEditingController();
 
-  void _incrementCounter() {
+  void _fetchWeatherByCity() async {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      _errorMessage = '';
+      _weather = null;
     });
+    try {
+      final weather = await _weatherService.getWeatherByCity(_cityController.text);
+      setState(() {
+        _weather = weather;
+      });
+    } catch (e) {
+      setState(() {
+        _errorMessage = e.toString();
+      });
+    }
+  }
+
+  void _fetchWeatherByLatLon() async {
+    setState(() {
+      _errorMessage = '';
+      _weather = null;
+    });
+    try {
+      final lat = double.parse(_latController.text);
+      final lon = double.parse(_lonController.text);
+      final weather = await _weatherService.getWeatherByLatLon(lat, lon);
+      setState(() {
+        _weather = weather;
+      });
+    } catch (e) {
+      setState(() {
+        _errorMessage = e.toString();
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: const Text('Weather App'),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextField(
+                controller: _cityController,
+                decoration: const InputDecoration(
+                  labelText: 'Nhập tên thành phố (ví dụ: Ha Noi)',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: _fetchWeatherByCity,
+                child: const Text('Lấy thời tiết theo thành phố'),
+              ),
+              const SizedBox(height: 20),
+              TextField(
+                controller: _latController,
+                decoration: const InputDecoration(
+                  labelText: 'Nhập vĩ độ (lat)',
+                  border: OutlineInputBorder(),
+                ),
+                keyboardType: TextInputType.number,
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: _lonController,
+                decoration: const InputDecoration(
+                  labelText: 'Nhập kinh độ (lon)',
+                  border: OutlineInputBorder(),
+                ),
+                keyboardType: TextInputType.number,
+              ),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: _fetchWeatherByLatLon,
+                child: const Text('Lấy thời tiết theo tọa độ'),
+              ),
+              const SizedBox(height: 20),
+              if (_errorMessage.isNotEmpty)
+                Text(
+                  _errorMessage,
+                  style: const TextStyle(color: Colors.red),
+                ),
+              if (_weather != null) ...[
+                const Text(
+                  'Vị trí:',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                Text('Thành phố: ${_weather!.location.city}'),
+                Text('Quốc gia: ${_weather!.location.country}'),
+                Text('Vĩ độ: ${_weather!.location.latitude}'),
+                Text('Kinh độ: ${_weather!.location.longitude}'),
+                const SizedBox(height: 10),
+                const Text(
+                  'Thời tiết hiện tại:',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                Text('Nhiệt độ: ${_weather!.currentWeather.temperature} ${_weather!.currentWeather.unit}'),
+                Text('Nhiệt độ cảm giác: ${_weather!.currentWeather.feelsLike} ${_weather!.currentWeather.unit}'),
+                Text('Nhiệt độ cao nhất: ${_weather!.currentWeather.maxTemperature} ${_weather!.currentWeather.unit}'),
+                Text('Nhiệt độ thấp nhất: ${_weather!.currentWeather.minTemperature} ${_weather!.currentWeather.unit}'),
+                Text('Độ ẩm: ${_weather!.currentWeather.humidity}%'),
+                Text('Áp suất: ${_weather!.currentWeather.pressure} hPa'),
+                Text('Chỉ số UV: ${_weather!.currentWeather.uvIndex}'),
+                Text('Độ che phủ mây: ${_weather!.currentWeather.cloudCover}%'),
+                Text('Mô tả thời tiết: ${_weather!.currentWeather.weatherDescription}'),
+                Text('Gió: Tốc độ ${_weather!.currentWeather.wind.speed} ${_weather!.currentWeather.wind.unit}, Hướng ${_weather!.currentWeather.wind.direction}'),
+                Text('Mặt trời mọc: ${_weather!.currentWeather.sunrise}'),
+                Text('Mặt trời lặn: ${_weather!.currentWeather.sunset}'),
+                const SizedBox(height: 10),
+                const Text(
+                  'Dự báo 5 ngày:',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                for (var forecast in _weather!.fiveDayForecast)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Ngày: ${forecast.date}'),
+                      Text('Mô tả: ${forecast.weatherDescription}'),
+                      Text('Nhiệt độ cao nhất: ${forecast.maxTemperature}°C'),
+                      Text('Nhiệt độ thấp nhất: ${forecast.minTemperature}°C'),
+                      const SizedBox(height: 5),
+                    ],
+                  ),
+                const SizedBox(height: 10),
+                const Text(
+                  'Dự báo 24 giờ:',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                for (var hour in _weather!.twentyFourHourForecast)
+                  Text('Thời gian: ${hour.time}, Nhiệt độ cảm giác: ${hour.feelsLike}°C'),
+                const SizedBox(height: 10),
+                Text('Thời gian lấy dữ liệu: ${_weather!.dataFetchedAt}'),
+              ],
+            ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
