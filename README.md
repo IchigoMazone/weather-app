@@ -44,7 +44,7 @@
 
 ***
 
-#### Ngày 3/11: Xây dựng xương sống app
+#### Ngày 3.1/11: Xây dựng xương sống app
 
 ***
 
