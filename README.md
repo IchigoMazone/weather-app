@@ -44,7 +44,33 @@
 
 ***
 
-##### Tiếp theo sẽ là xây dựng giao diện cho ứng dụng...
+#### Ngày 3/11: Xây dựng xương sống app
+
+***
+
+**Xây dựng cấu trúc app với các chức năng**
+
+- Xem thông tin thời tiết
+- Thêm, xóa địa điểm 
+- Chuyển đổi theme và language
+
+**Kết quả**
+
+- Xây dựng thành công giao diện thời tiết cơ bản
+- Đã có thể chuyển đổi theme và language
+- Đã có thể thêm, xóa địa điểm 
+
+**Chưa hoàn thiện**
+
+- Chưa chuyển đổi được language ở trang chính
+- Các giao diện chỉ đang là demo 
+
+**Tiếp theo**
+
+- Hoàn thành phần chuyển đổi language
+- Nâng cấp giao diện
+- Thêm giao diện 5-day forecast
+- Rest API nếu còn thời gian
 
 ***
 
