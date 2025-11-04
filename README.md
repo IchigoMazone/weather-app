@@ -65,13 +65,15 @@
 - Chưa chuyển đổi được language ở trang chính
 - Các giao diện chỉ đang là demo 
 
+***
+### Ngày 4.4/11: Thêm giao diện 5-day forecast
+***
+
 **Tiếp theo**
 
 - Hoàn thành phần chuyển đổi language
 - Nâng cấp giao diện
-- Thêm giao diện 5-day forecast
 - Thêm trang giới thiệu nhóm ở giao diện app
-- Rest API nếu còn thời gian
 
 ***
 
