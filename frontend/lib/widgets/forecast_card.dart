@@ -4,8 +4,13 @@ import '../models/location_model.dart';
 
 class ForecastCard extends StatelessWidget {
   final Location location;
+  final VoidCallback? onFiveDayPressed; 
 
-  const ForecastCard({super.key, required this.location});
+  const ForecastCard({
+    super.key,
+    required this.location,
+    this.onFiveDayPressed, 
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +35,19 @@ class ForecastCard extends StatelessWidget {
             width: double.infinity,
             height: 54,
             child: ElevatedButton(
-              onPressed: () => print('Xem dự báo 5 ngày'),
+              onPressed: onFiveDayPressed, 
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white.withOpacity(0.35),
                 foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16), side: const BorderSide(color: Colors.white54, width: 1.5)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  side: const BorderSide(color: Colors.white54, width: 1.5),
+                ),
               ),
-              child: const Text('5-day forecast', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600)),
+              child: const Text(
+                '5-day forecast',
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+              ),
             ),
           ),
         ],
@@ -50,7 +61,10 @@ class ForecastCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(width: 92, child: Text(day, style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600))),
+          SizedBox(
+            width: 92,
+            child: Text(day, style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600)),
+          ),
           Icon(icon, color: Colors.yellow[600], size: 30),
           Expanded(
             child: Row(
@@ -58,7 +72,14 @@ class ForecastCard extends StatelessWidget {
               children: [
                 Text('$min°', style: const TextStyle(color: Colors.white70, fontSize: 16)),
                 const SizedBox(width: 14),
-                Container(width: 96, height: 7, decoration: BoxDecoration(borderRadius: BorderRadius.circular(4), gradient: LinearGradient(colors: [Colors.orange.shade400, Colors.yellow.shade600]))),
+                Container(
+                  width: 96,
+                  height: 7,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    gradient: LinearGradient(colors: [Colors.orange.shade400, Colors.yellow.shade600]),
+                  ),
+                ),
                 const SizedBox(width: 14),
                 Text('$max°', style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w600)),
               ],

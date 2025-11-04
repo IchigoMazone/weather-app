@@ -7,6 +7,7 @@ import '../widgets/hourly_forecast.dart';
 import '../widgets/weather_details_grid.dart';
 import 'manage_cities_screen.dart';
 import 'settings_screen.dart';
+import 'five_day_forecast_screen.dart';
 import '../localization/app_localizations.dart';
 
 class WeatherHomeScreen extends StatefulWidget {
@@ -21,7 +22,6 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
   late final ScrollController _scrollController;
   int _currentPage = 0;
 
-  // 20 ĐỊA ĐIỂM ĐỂ TEST
   List<Location> _locations = [
     Location(name: 'Hoài Đức', country: 'Hà Nội, Việt Nam', temp: 21, condition: 'Cloudy', min: 20, max: 24),
     Location(name: 'Hà Nội', country: 'Hà Nội, Việt Nam', temp: 23, condition: 'Cloudy', min: 21, max: 24),
@@ -105,14 +105,13 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
   void _openSettings() {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => const SettingsScreen(),
-      ),
+      MaterialPageRoute(builder: (context) => const SettingsScreen()),
     );
   }
 
   @override
   void dispose() {
+    _pageController.removeListener(_pageListener);
     _pageController.dispose();
     _scrollController.dispose();
     super.dispose();
@@ -129,20 +128,19 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: Theme.of(context).brightness == Brightness.light
-              ? [Color(0xFF1E90FF), Color(0xFF87CEEB), Color(0xFFE0F7FA)]
-              : [Color(0xFF0D47A1), Color(0xFF1565C0), Color(0xFF1E88E5)],
+                ? [Color(0xFF1E90FF), Color(0xFF87CEEB), Color(0xFFE0F7FA)]
+                : [Color(0xFF0D47A1), Color(0xFF1565C0), Color(0xFF1E88E5)],
           ),
         ),
         child: Stack(
           children: [
             Positioned.fill(
               child: Container(
-                color: Theme.of(context).brightness == Brightness.light 
-                  ? Colors.white.withOpacity(0.08) 
-                  : Colors.black.withOpacity(0.08),
+                color: Theme.of(context).brightness == Brightness.light
+                    ? Colors.white.withOpacity(0.08)
+                    : Colors.black.withOpacity(0.08),
               ),
             ),
-
             SafeArea(
               child: PageView.builder(
                 controller: _pageController,
@@ -155,7 +153,9 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
                   return RepaintBoundary(
                     child: SingleChildScrollView(
                       controller: isCurrentPage ? _scrollController : null,
-                      physics: isCurrentPage ? const AlwaysScrollableScrollPhysics() : const NeverScrollableScrollPhysics(),
+                      physics: isCurrentPage
+                          ? const AlwaysScrollableScrollPhysics()
+                          : const NeverScrollableScrollPhysics(),
                       child: Column(
                         children: [
                           SizedBox(
@@ -175,7 +175,6 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
                                     ],
                                   ),
                                   const SizedBox(height: 30),
-
                                   Text(
                                     location.name,
                                     style: TextStyle(
@@ -186,7 +185,6 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
                                       shadows: [Shadow(color: Colors.black26, blurRadius: 4, offset: Offset(1, 2))],
                                     ),
                                   ),
-
                                   const SizedBox(height: 8),
                                   Align(
                                     alignment: Alignment.centerLeft,
@@ -209,7 +207,6 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
                                               if (actualIndex >= _locations.length) actualIndex = _locations.length - 1;
                                             }
                                             final bool isActive = actualIndex == _currentPage;
-
                                             return AnimatedContainer(
                                               duration: const Duration(milliseconds: 200),
                                               curve: Curves.easeOut,
@@ -229,18 +226,40 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
                                       ),
                                     ),
                                   ),
-
                                   const SizedBox(height: 28),
-                                  Text('${location.temp}°', style: TextStyle(fontSize: 170, color: Colors.white, fontWeight: FontWeight.w100, height: 0.9, shadows: [Shadow(color: Colors.black38, blurRadius: 8, offset: Offset(3, 4))])),
-                                  Text('${location.condition} • ${location.max}° / ${location.min}°', style: TextStyle(fontSize: 19, color: Colors.white70, letterSpacing: 0.8, fontWeight: FontWeight.w500)),
+                                  Text(
+                                    '${location.temp}°',
+                                    style: TextStyle(
+                                      fontSize: 170,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w100,
+                                      height: 0.9,
+                                      shadows: [Shadow(color: Colors.black38, blurRadius: 8, offset: Offset(3, 4))],
+                                    ),
+                                  ),
+                                  Text(
+                                    '${location.condition} • ${location.max}° / ${location.min}°',
+                                    style: TextStyle(fontSize: 19, color: Colors.white70, letterSpacing: 0.8, fontWeight: FontWeight.w500),
+                                  ),
                                   const Spacer(),
-                                  ForecastCard(location: location),
+                                  // TRUYỀN onFiveDayPressed
+                                  ForecastCard(
+                                    location: location,
+                                    onFiveDayPressed: () {
+                                      print("MỞ 5-DAY FORECAST: ${location.name}");
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => FiveDayForecastScreen(location: location),
+                                        ),
+                                      );
+                                    },
+                                  ),
                                   const SizedBox(height: 32),
                                 ],
                               ),
                             ),
                           ),
-
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 28.0),
                             child: Column(

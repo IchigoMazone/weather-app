@@ -5,6 +5,7 @@ import '../widgets/forecast_card.dart';
 import '../widgets/hourly_forecast.dart';
 import '../widgets/weather_details_grid.dart';
 import '../localization/app_localizations.dart';
+import 'five_day_forecast_screen.dart';
 
 class PreviewLocationScreen extends StatelessWidget {
   final Location location;
@@ -44,12 +45,10 @@ class PreviewLocationScreen extends StatelessWidget {
                     : Colors.black.withOpacity(0.08),
               ),
             ),
-
             SafeArea(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    // PHẦN TRÊN: THÔNG TIN + 5-DAY
                     SizedBox(
                       height: MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top,
                       child: Padding(
@@ -58,8 +57,6 @@ class PreviewLocationScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 24),
-
-                            // NÚT HỦY / THÊM – TẠO RIÊNG, GIỐNG HOME
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -76,9 +73,7 @@ class PreviewLocationScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-
                             const SizedBox(height: 30),
-
                             Text(
                               location.name,
                               style: const TextStyle(
@@ -89,7 +84,6 @@ class PreviewLocationScreen extends StatelessWidget {
                                 shadows: [Shadow(color: Colors.black26, blurRadius: 4, offset: Offset(1, 2))],
                               ),
                             ),
-
                             const SizedBox(height: 28),
                             Text(
                               '${location.temp}°',
@@ -106,14 +100,24 @@ class PreviewLocationScreen extends StatelessWidget {
                               style: const TextStyle(fontSize: 19, color: Colors.white70, letterSpacing: 0.8, fontWeight: FontWeight.w500),
                             ),
                             const Spacer(),
-                            ForecastCard(location: location),
+
+                            ForecastCard(
+                              location: location,
+                              onFiveDayPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => FiveDayForecastScreen(location: location),
+                                  ),
+                                );
+                              },
+                            ),
+
                             const SizedBox(height: 32),
                           ],
                         ),
                       ),
                     ),
-
-                    // PHẦN DƯỚI: CUỘN XUỐNG MỚI THẤY
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 28.0),
                       child: Column(
@@ -135,7 +139,6 @@ class PreviewLocationScreen extends StatelessWidget {
     );
   }
 
-  // TẠO NÚT RIÊNG CHO PREVIEW – GIỐNG HỆT HOME
   Widget _buildPreviewActionButton({
     required IconData icon,
     required VoidCallback onTap,
