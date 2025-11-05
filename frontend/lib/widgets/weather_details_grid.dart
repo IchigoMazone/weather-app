@@ -1,21 +1,25 @@
-// lib/widgets/weather_details_grid.dart
+
 import 'package:flutter/material.dart';
 import 'detail_card.dart';
 import '../utils/weather_detail_type.dart';
+import '../localization/app_localizations.dart';
 
 class WeatherDetailsGrid extends StatelessWidget {
   const WeatherDetailsGrid({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Column(
       children: [
         Row(
           children: [
             Expanded(
               child: DetailCard(
-                title: 'UV',
-                value: 'Moderate',
+                title: loc.translate('uv'),
+                value: loc.translate('moderate'),
                 extra: '4',
                 type: WeatherDetailType.uv,
               ),
@@ -23,7 +27,7 @@ class WeatherDetailsGrid extends StatelessWidget {
             const SizedBox(width: 16),
             Expanded(
               child: DetailCard(
-                title: 'Humidity',
+                title: loc.translate('humidity'),
                 value: '50%',
                 extra: '',
                 type: WeatherDetailType.humidity,
@@ -36,7 +40,7 @@ class WeatherDetailsGrid extends StatelessWidget {
           children: [
             Expanded(
               child: DetailCard(
-                title: 'Real feel',
+                title: loc.translate('real_feel'),
                 value: '29°',
                 extra: '',
                 type: WeatherDetailType.realFeel,
@@ -45,8 +49,8 @@ class WeatherDetailsGrid extends StatelessWidget {
             const SizedBox(width: 16),
             Expanded(
               child: DetailCard(
-                title: 'Northeast',
-                value: 'Force 3',
+                title: loc.translate('northeast'),
+                value: '${loc.translate('force')} 3',
                 extra: '',
                 type: WeatherDetailType.wind,
               ),
@@ -58,7 +62,7 @@ class WeatherDetailsGrid extends StatelessWidget {
           children: [
             Expanded(
               child: DetailCard(
-                title: 'Sunset',
+                title: loc.translate('sunset'),
                 value: '17:25',
                 extra: '17:25',
                 type: WeatherDetailType.sunset,
@@ -67,7 +71,7 @@ class WeatherDetailsGrid extends StatelessWidget {
             const SizedBox(width: 16),
             Expanded(
               child: DetailCard(
-                title: 'Pressure',
+                title: loc.translate('pressure'),
                 value: '1016',
                 extra: 'hPa',
                 type: WeatherDetailType.pressure,

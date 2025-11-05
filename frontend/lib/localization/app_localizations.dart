@@ -5,13 +5,12 @@ class AppLocalizations {
   final Locale locale;
 
   AppLocalizations(this.locale);
+
   static AppLocalizations of(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
-
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
   static final Map<String, Map<String, String>> _localizedValues = {
     'en': {
       'manage_cities': 'Manage cities',
@@ -23,6 +22,13 @@ class AppLocalizations {
       'add': 'Add',
       'today': 'Today',
       'tomorrow': 'Tomorrow',
+      'thu': 'Thu',
+      'fri': 'Fri',
+      'sat': 'Sat',
+      'sun': 'Sun',
+      'mon': 'Mon',
+      'tue': 'Tue',
+      'wed': 'Wed',
       'uv': 'UV',
       'humidity': 'Humidity',
       'real_feel': 'Real feel',
@@ -41,6 +47,25 @@ class AppLocalizations {
       'english': 'English',
       '5_day_forecast': '5-day forecast',
       '24_hour_forecast': '24-hour forecast',
+      'cloudy': 'Cloudy',
+      'sunny': 'Sunny',
+      'rainy': 'Rainy',
+      'partly_cloudy': 'Partly Cloudy',
+      'app_name': 'Weather App',
+      'loading_app': 'Starting application...',
+      'group': 'Group',
+      'course': 'Course: Mobile Programming',
+      'class': 'Class',
+      'date': 'Date',
+      'member': 'Member',
+      'student_id': 'Student ID',
+      'major': 'Major',
+      '27': '27',
+      'N04': 'N04',
+      '1-1-2025': '1-1-2025',
+      'Trịnh Như Nhất': 'Trinh Nhu Nhat',
+      '23010600': '23010600',
+      'Khoa Học Máy Tính & Trí Tuệ Nhân Tạo': 'Computer Science & AI',
     },
     'vi': {
       'manage_cities': 'Quản lý thành phố',
@@ -52,6 +77,13 @@ class AppLocalizations {
       'add': 'Thêm',
       'today': 'Hôm nay',
       'tomorrow': 'Ngày mai',
+      'thu': 'Thứ 5',
+      'fri': 'Thứ 6',
+      'sat': 'Thứ 7',
+      'sun': 'Chủ nhật',
+      'mon': 'Thứ 2',
+      'tue': 'Thứ 3',
+      'wed': 'Thứ 4',
       'uv': 'UV',
       'humidity': 'Độ ẩm',
       'real_feel': 'Cảm giác thực',
@@ -70,6 +102,25 @@ class AppLocalizations {
       'english': 'Tiếng Anh',
       '5_day_forecast': 'Dự báo 5 ngày',
       '24_hour_forecast': 'Dự báo 24 giờ',
+      'cloudy': 'Nhiều mây',
+      'sunny': 'Nắng',
+      'rainy': 'Mưa',
+      'partly_cloudy': 'Có mây',
+      'app_name': 'Ứng dụng Thời tiết',
+      'loading_app': 'Đang khởi động ứng dụng...',
+      'group': 'Nhóm',
+      'course': 'Môn: Lập Trình Thiết Bị Di Động',
+      'class': 'Lớp',
+      'date': 'Ngày',
+      'member': 'Thành viên',
+      'student_id': 'Mã SV',
+      'major': 'Ngành',
+      '27': '27',
+      'N04': 'N04',
+      '1-1-2025': '1-1-2025',
+      'Trịnh Như Nhất': 'Trịnh Như Nhất',
+      '23010600': '23010600',
+      'Khoa Học Máy Tính & Trí Tuệ Nhân Tạo': 'Khoa Học Máy Tính & Trí Tuệ Nhân Tạo',
     },
   };
 

@@ -32,24 +32,40 @@ class _ManageCitiesScreenState extends State<ManageCitiesScreen> {
   List<Location> _searchSuggestions = [];
 
   static final List<Location> _allPossibleLocations = [
-    Location(name: 'Hà Nội', country: 'Hà Nội, Việt Nam', temp: 23, condition: 'Cloudy', min: 21, max: 24),
-    Location(name: 'Hà Nam', country: 'Lai Châu, Việt Nam', temp: 22, condition: 'Cloudy', min: 20, max: 25),
+    Location(name: 'Tuyên Quang', country: 'Tuyên Quang, Việt Nam', temp: 23, condition: 'Cloudy', min: 21, max: 24),
+    Location(name: 'Lào Cai', country: 'Lào Cai, Việt Nam', temp: 22, condition: 'Cloudy', min: 20, max: 25),
+    Location(name: 'Thái Nguyên', country: 'Thái Nguyên, Việt Nam', temp: 25, condition: 'Rainy', min: 22, max: 27),
+    Location(name: 'Phú Thọ', country: 'Phú Thọ, Việt Nam', temp: 30, condition: 'Sunny', min: 25, max: 32),
+    Location(name: 'Bắc Ninh', country: 'Bắc Ninh, Việt Nam', temp: 31, condition: 'Sunny', min: 26, max: 33),
+    Location(name: 'Hưng Yên', country: 'Hưng Yên, Việt Nam', temp: 29, condition: 'Partly Cloudy', min: 24, max: 30),
+    Location(name: 'Hải Phòng', country: 'Hải Phòng, Việt Nam', temp: 27, condition: 'Rainy', min: 23, max: 29),
+    Location(name: 'Ninh Bình', country: 'Ninh Bình, Việt Nam', temp: 18, condition: 'Cloudy', min: 15, max: 22),
+    Location(name: 'Hà Nội', country: 'Hà Nội, Việt Nam', temp: 24, condition: 'Rainy', min: 22, max: 27),
+    Location(name: 'Lai Châu', country: 'Lai Châu, Việt Nam', temp: 29, condition: 'Sunny', min: 25, max: 31),
+    Location(name: 'Điện Biên', country: 'Điện Biên, Việt Nam', temp: 32, condition: 'Sunny', min: 27, max: 34),
+    Location(name: 'Sơn La', country: 'Sơn La, Việt Nam', temp: 22, condition: 'Cloudy', min: 19, max: 25),
+    Location(name: 'Lạng Sơn', country: 'Lạng Sơn, Việt Nam', temp: 24, condition: 'Partly Cloudy', min: 20, max: 27),
+    Location(name: 'Quảng Ninh', country: 'Quảng Ninh, Việt Nam', temp: 20, condition: 'Cloudy', min: 18, max: 23),
+    Location(name: 'Cao Bằng', country: 'Cao Bằng, Việt Nam', temp: 26, condition: 'Rainy', min: 23, max: 28),
+    Location(name: 'Thanh Hóa', country: 'Thanh Hóa, Việt Nam', temp: 23, condition: 'Cloudy', min: 21, max: 24),
+    Location(name: 'Nghệ An', country: 'Nghệ An, Việt Nam', temp: 22, condition: 'Cloudy', min: 20, max: 25),
     Location(name: 'Hà Tĩnh', country: 'Hà Tĩnh, Việt Nam', temp: 25, condition: 'Rainy', min: 22, max: 27),
-    Location(name: 'Đà Nẵng', country: 'Đà Nẵng, Việt Nam', temp: 30, condition: 'Sunny', min: 25, max: 32),
-    Location(name: 'Nha Trang', country: 'Khánh Hòa, Việt Nam', temp: 31, condition: 'Sunny', min: 26, max: 33),
-    Location(name: 'Vũng Tàu', country: 'Bà Rịa - Vũng Tàu, Việt Nam', temp: 29, condition: 'Partly Cloudy', min: 24, max: 30),
-    Location(name: 'Cần Thơ', country: 'Cần Thơ, Việt Nam', temp: 27, condition: 'Rainy', min: 23, max: 29),
-    Location(name: 'Đà Lạt', country: 'Lâm Đồng, Việt Nam', temp: 18, condition: 'Cloudy', min: 15, max: 22),
-    Location(name: 'Huế', country: 'Thừa Thiên Huế, Việt Nam', temp: 24, condition: 'Rainy', min: 22, max: 27),
-    Location(name: 'Hội An', country: 'Quảng Nam, Việt Nam', temp: 29, condition: 'Sunny', min: 25, max: 31),
-    Location(name: 'Phú Quốc', country: 'Kiên Giang, Việt Nam', temp: 32, condition: 'Sunny', min: 27, max: 34),
-    Location(name: 'Nam Định', country: 'Nam Định, Việt Nam', temp: 22, condition: 'Cloudy', min: 19, max: 25),
-    Location(name: 'Hạ Long', country: 'Quảng Ninh, Việt Nam', temp: 24, condition: 'Partly Cloudy', min: 20, max: 27),
-    Location(name: 'Thái Nguyên', country: 'Thái Nguyên, Việt Nam', temp: 20, condition: 'Cloudy', min: 18, max: 23),
-    Location(name: 'Vinh', country: 'Nghệ An, Việt Nam', temp: 26, condition: 'Rainy', min: 23, max: 28),
-    Location(name: 'Biên Hòa', country: 'Đồng Nai, Việt Nam', temp: 28, condition: 'Partly Cloudy', min: 24, max: 30),
-    Location(name: 'Long Xuyên', country: 'An Giang, Việt Nam', temp: 27, condition: 'Rainy', min: 23, max: 29),
-    Location(name: 'Cao Bằng', country: 'Cao Bằng, Việt Nam', temp: 19, condition: 'Cloudy', min: 16, max: 22),
+    Location(name: 'Quảng Trị', country: 'Quảng Trị, Việt Nam', temp: 30, condition: 'Sunny', min: 25, max: 32),
+    Location(name: 'Đà Nẵng', country: 'Đà Nẵng, Việt Nam', temp: 31, condition: 'Sunny', min: 26, max: 33),
+    Location(name: 'Quảng Ngãi', country: 'Quảng Ngãi, Việt Nam', temp: 29, condition: 'Partly Cloudy', min: 24, max: 30),
+    Location(name: 'Gia Lai', country: 'Gia Lai, Việt Nam', temp: 27, condition: 'Rainy', min: 23, max: 29),
+    Location(name: 'Khánh Hòa', country: 'Khánh Hòa, Việt Nam', temp: 18, condition: 'Cloudy', min: 15, max: 22),
+    Location(name: 'Lâm Đồng', country: 'Lâm Đồng, Việt Nam', temp: 24, condition: 'Rainy', min: 22, max: 27),
+    Location(name: 'Đắk Lắk', country: 'Đắk Lắk, Việt Nam', temp: 29, condition: 'Sunny', min: 25, max: 31),
+    Location(name: 'Huế', country: 'Thừa Thiên Huế, Việt Nam', temp: 32, condition: 'Sunny', min: 27, max: 34),
+    Location(name: 'Hồ Chí Minh', country: 'Hồ Chí Minh, Việt Nam', temp: 22, condition: 'Cloudy', min: 19, max: 25),
+    Location(name: 'Đồng Nai', country: 'Đồng Nai, Việt Nam', temp: 24, condition: 'Partly Cloudy', min: 20, max: 27),
+    Location(name: 'Tây Ninh', country: 'Tây Ninh, Việt Nam', temp: 20, condition: 'Cloudy', min: 18, max: 23),
+    Location(name: 'Cần Thơ', country: 'Cần Thơ, Việt Nam', temp: 26, condition: 'Rainy', min: 23, max: 28),
+    Location(name: 'Vĩnh Long', country: 'Vĩnh Long, Việt Nam', temp: 23, condition: 'Cloudy', min: 21, max: 24),
+    Location(name: 'Đồng Tháp', country: 'Đồng Tháp, Việt Nam', temp: 22, condition: 'Cloudy', min: 20, max: 25),
+    Location(name: 'Cà Mau', country: 'Cà Mau, Việt Nam', temp: 25, condition: 'Rainy', min: 22, max: 27),
+    Location(name: 'An Giang', country: 'An Giang, Việt Nam', temp: 30, condition: 'Sunny', min: 25, max: 32),
   ];
 
   @override
@@ -122,6 +138,22 @@ class _ManageCitiesScreenState extends State<ManageCitiesScreen> {
   void dispose() {
     _searchController.dispose();
     super.dispose();
+  }
+
+    // Thêm hàm này vào đây (trong class _ManageCitiesScreenState)
+  String _translateCondition(String condition, AppLocalizations loc) {
+    switch (condition) {
+      case 'Cloudy':
+        return loc.translate('cloudy');
+      case 'Sunny':
+        return loc.translate('sunny');
+      case 'Rainy':
+        return loc.translate('rainy');
+      case 'Partly Cloudy':
+        return loc.translate('partly_cloudy');
+      default:
+        return condition;
+    }
   }
 
   @override
@@ -293,6 +325,7 @@ class _ManageCitiesScreenState extends State<ManageCitiesScreen> {
 
   Widget _buildLocationCard(Location location, {bool isCurrent = false, VoidCallback? onRemove}) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final loc = AppLocalizations.of(context);
 
     return Container(
       width: double.infinity,
@@ -324,7 +357,7 @@ class _ManageCitiesScreenState extends State<ManageCitiesScreen> {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  location.condition,
+                  _translateCondition(location.condition, loc),
                   style: TextStyle(color: isDark ? Colors.white70 : Colors.grey[700], fontSize: 15),
                 ),
               ],

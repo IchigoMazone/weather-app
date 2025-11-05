@@ -24,25 +24,11 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
 
   List<Location> _locations = [
     Location(name: 'Hoài Đức', country: 'Hà Nội, Việt Nam', temp: 21, condition: 'Cloudy', min: 20, max: 24),
-    Location(name: 'Hà Nội', country: 'Hà Nội, Việt Nam', temp: 23, condition: 'Cloudy', min: 21, max: 24),
-    Location(name: 'Buôn Ma Thuột', country: 'Đắk Lắk, Việt Nam', temp: 28, condition: 'Cloudy', min: 21, max: 28),
-    Location(name: 'Cẩm Phả', country: 'Quảng Ninh, Việt Nam', temp: 26, condition: 'Cloudy', min: 21, max: 26),
-    Location(name: 'Hải Phòng', country: 'Hải Phòng, Việt Nam', temp: 25, condition: 'Cloudy', min: 21, max: 25),
-    Location(name: 'Đà Nẵng', country: 'Đà Nẵng, Việt Nam', temp: 30, condition: 'Sunny', min: 25, max: 32),
-    Location(name: 'Nha Trang', country: 'Khánh Hòa, Việt Nam', temp: 31, condition: 'Sunny', min: 26, max: 33),
-    Location(name: 'Vũng Tàu', country: 'Bà Rịa - Vũng Tàu, Việt Nam', temp: 29, condition: 'Partly Cloudy', min: 24, max: 30),
-    Location(name: 'Cần Thơ', country: 'Cần Thơ, Việt Nam', temp: 27, condition: 'Rainy', min: 23, max: 29),
-    Location(name: 'Đà Lạt', country: 'Lâm Đồng, Việt Nam', temp: 18, condition: 'Cloudy', min: 15, max: 22),
-    Location(name: 'Huế', country: 'Thừa Thiên Huế, Việt Nam', temp: 24, condition: 'Rainy', min: 22, max: 27),
-    Location(name: 'Hội An', country: 'Quảng Nam, Việt Nam', temp: 29, condition: 'Sunny', min: 25, max: 31),
-    Location(name: 'Phú Quốc', country: 'Kiên Giang, Việt Nam', temp: 32, condition: 'Sunny', min: 27, max: 34),
-    Location(name: 'Nam Định', country: 'Nam Định, Việt Nam', temp: 22, condition: 'Cloudy', min: 19, max: 25),
-    Location(name: 'Hạ Long', country: 'Quảng Ninh, Việt Nam', temp: 24, condition: 'Partly Cloudy', min: 20, max: 27),
-    Location(name: 'Thái Nguyên', country: 'Thái Nguyên, Việt Nam', temp: 20, condition: 'Cloudy', min: 18, max: 23),
-    Location(name: 'Vinh', country: 'Nghệ An, Việt Nam', temp: 26, condition: 'Rainy', min: 23, max: 28),
-    Location(name: 'Biên Hòa', country: 'Đồng Nai, Việt Nam', temp: 28, condition: 'Partly Cloudy', min: 24, max: 30),
-    Location(name: 'Long Xuyên', country: 'An Giang, Việt Nam', temp: 27, condition: 'Rainy', min: 23, max: 29),
-    Location(name: 'Cao Bằng', country: 'Cao Bằng, Việt Nam', temp: 19, condition: 'Cloudy', min: 16, max: 22),
+    Location(name: 'Hà Nội', country: 'Hà Nội, Việt Nam', temp: 24, condition: 'Rainy', min: 22, max: 27),
+    Location(name: 'Đà Nẵng', country: 'Đà Nẵng, Việt Nam', temp: 31, condition: 'Sunny', min: 26, max: 33),
+    Location(name: 'Hồ Chí Minh', country: 'Hồ Chí Minh, Việt Nam', temp: 22, condition: 'Cloudy', min: 19, max: 25),
+    Location(name: 'Thanh Hóa', country: 'Thanh Hóa, Việt Nam', temp: 23, condition: 'Cloudy', min: 21, max: 24),
+    Location(name: 'Ninh Bình', country: 'Ninh Bình, Việt Nam', temp: 18, condition: 'Cloudy', min: 15, max: 22),
   ];
 
   @override
@@ -54,7 +40,7 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
   }
 
   void _pageListener() {
-    final next = _pageController.page?.round() ?? 0;
+    final next = (_pageController.page?.round() ?? 0);
     if (_currentPage != next) {
       setState(() => _currentPage = next);
       if (_scrollController.hasClients) _scrollController.jumpTo(0);
@@ -117,9 +103,21 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
     super.dispose();
   }
 
+  String _translateCondition(String condition, AppLocalizations loc) {
+    switch (condition) {
+      case 'Cloudy': return loc.translate('cloudy');
+      case 'Sunny': return loc.translate('sunny');
+      case 'Rainy': return loc.translate('rainy');
+      case 'Partly Cloudy': return loc.translate('partly_cloudy');
+      default: return condition;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Container(
@@ -127,18 +125,16 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: Theme.of(context).brightness == Brightness.light
-                ? [Color(0xFF1E90FF), Color(0xFF87CEEB), Color(0xFFE0F7FA)]
-                : [Color(0xFF0D47A1), Color(0xFF1565C0), Color(0xFF1E88E5)],
+            colors: isDark
+                ? [Color(0xFF0D47A1), Color(0xFF1565C0), Color(0xFF1E88E5)]
+                : [Color(0xFF1E90FF), Color(0xFF87CEEB), Color(0xFFE0F7FA)],
           ),
         ),
         child: Stack(
           children: [
             Positioned.fill(
               child: Container(
-                color: Theme.of(context).brightness == Brightness.light
-                    ? Colors.white.withOpacity(0.08)
-                    : Colors.black.withOpacity(0.08),
+                color: isDark ? Colors.black.withOpacity(0.08) : Colors.white.withOpacity(0.08),
               ),
             ),
             SafeArea(
@@ -149,6 +145,7 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
                 itemBuilder: (context, index) {
                   final location = _locations[index];
                   final isCurrentPage = index == _currentPage;
+                  final translatedCondition = _translateCondition(location.condition, loc);
 
                   return RepaintBoundary(
                     child: SingleChildScrollView(
@@ -192,32 +189,31 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
                                       padding: const EdgeInsets.only(left: 2),
                                       child: SizedBox(
                                         height: 10,
+                                        width: 90, 
                                         child: ListView.builder(
                                           shrinkWrap: true,
                                           scrollDirection: Axis.horizontal,
                                           physics: const NeverScrollableScrollPhysics(),
-                                          itemCount: _locations.length > 6 ? 6 : _locations.length,
+                                          itemCount: _locations.length,
                                           itemBuilder: (context, i) {
-                                            int actualIndex;
-                                            if (_locations.length <= 6) {
-                                              actualIndex = i;
-                                            } else {
-                                              actualIndex = _currentPage - (5 - i);
-                                              if (actualIndex < 0) actualIndex = 0;
-                                              if (actualIndex >= _locations.length) actualIndex = _locations.length - 1;
+                                            
+                                            final distance = (i - _currentPage).abs();
+                                            if (_locations.length > 6 && distance > 2 && i != _currentPage) {
+                                              return const SizedBox.shrink(); 
                                             }
-                                            final bool isActive = actualIndex == _currentPage;
+
+                                            final isActive = i == _currentPage;
                                             return AnimatedContainer(
-                                              duration: const Duration(milliseconds: 200),
-                                              curve: Curves.easeOut,
-                                              margin: const EdgeInsets.symmetric(horizontal: 2.5),
-                                              width: isActive ? 9 : 6,
-                                              height: 6,
+                                              duration: const Duration(milliseconds: 300),
+                                              curve: Curves.easeOutCubic,
+                                              margin: const EdgeInsets.symmetric(horizontal: 3.5),
+                                              width: isActive ? 10 : 7,
+                                              height: isActive ? 10 : 7,
                                               decoration: BoxDecoration(
                                                 color: isActive ? Colors.white : Colors.white.withOpacity(0.5),
-                                                borderRadius: BorderRadius.circular(4),
+                                                shape: BoxShape.circle,
                                                 boxShadow: isActive
-                                                    ? [const BoxShadow(color: Colors.black26, blurRadius: 3, offset: Offset(0, 1))]
+                                                    ? [BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 2))]
                                                     : null,
                                               ),
                                             );
@@ -238,19 +234,27 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
                                     ),
                                   ),
                                   Text(
-                                    '${location.condition} • ${location.max}° / ${location.min}°',
-                                    style: TextStyle(fontSize: 19, color: Colors.white70, letterSpacing: 0.8, fontWeight: FontWeight.w500),
+                                    '$translatedCondition • ${location.max}° / ${location.min}°',
+                                    style: TextStyle(
+                                      fontSize: 19,
+                                      color: Colors.white70,
+                                      letterSpacing: 0.8,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                   const Spacer(),
-                                  // TRUYỀN onFiveDayPressed
                                   ForecastCard(
                                     location: location,
                                     onFiveDayPressed: () {
-                                      print("MỞ 5-DAY FORECAST: ${location.name}");
+                                      final theme = Theme.of(context);
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => FiveDayForecastScreen(location: location),
+                                          builder: (context) => FiveDayForecastScreen(
+                                            location: location,
+                                            theme: theme,
+                                            loc: loc,
+                                          ),
                                         ),
                                       );
                                     },

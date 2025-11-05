@@ -71,12 +71,14 @@
 ### Ngay 5.5/11: Sua giao dien hourly forecast
 
 ### Cap nhat 6 giao dien nho nhom painter
+
+### Cap nhap chuyen doi language 
 ***
+
+### Ngay 6.6/11: Cap nhat language toan he thong
 
 **Tiếp theo**
 
-- Hoàn thành phần chuyển đổi language
-- Nâng cấp giao diện
 - Thêm trang giới thiệu nhóm ở giao diện app
 
 ***

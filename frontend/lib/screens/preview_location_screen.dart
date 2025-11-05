@@ -19,9 +19,25 @@ class PreviewLocationScreen extends StatelessWidget {
     required this.onCancel,
   });
 
+  String _translateCondition(String condition, AppLocalizations loc) {
+    switch (condition) {
+      case 'Cloudy':
+        return loc.translate('cloudy');
+      case 'Sunny':
+        return loc.translate('sunny');
+      case 'Rainy':
+        return loc.translate('rainy');
+      case 'Partly Cloudy':
+        return loc.translate('partly_cloudy');
+      default:
+        return condition;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context);
+    final translatedCondition = _translateCondition(location.condition, loc);
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -96,23 +112,30 @@ class PreviewLocationScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '${location.condition} • ${location.max}° / ${location.min}°',
-                              style: const TextStyle(fontSize: 19, color: Colors.white70, letterSpacing: 0.8, fontWeight: FontWeight.w500),
+                              '$translatedCondition • ${location.max}° / ${location.min}°',
+                              style: const TextStyle(
+                                fontSize: 19,
+                                color: Colors.white70,
+                                letterSpacing: 0.8,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                             const Spacer(),
-
                             ForecastCard(
                               location: location,
                               onFiveDayPressed: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => FiveDayForecastScreen(location: location),
+                                    builder: (context) => FiveDayForecastScreen(
+                                      location: location,
+                                      theme: Theme.of(context),
+                                      loc: loc,
+                                    ),
                                   ),
                                 );
                               },
                             ),
-
                             const SizedBox(height: 32),
                           ],
                         ),
