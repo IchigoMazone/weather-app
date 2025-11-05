@@ -68,15 +68,12 @@
 ***
 ### Ngày 4.4/11: Thêm giao diện 5-day forecast
 ***
-### Ngay 5.5/11: Sua giao dien hourly forecast
-
-### Cap nhat 6 giao dien nho nhom painter
-
-### Cap nhap chuyen doi language 
+### Ngay 5.5/11: Sửa giao diện hourly forecast
 ***
-
-### Ngay 6.6/11: Cap nhat language toan he thong
-
+### Cập nhật sáu giao diện nhỏ nhóm painter 
+***
+### Ngay 6.6/11: Cập nhật language toàn hệ thống
+***
 **Tiếp theo**
 
 - Thêm trang giới thiệu nhóm ở giao diện app
