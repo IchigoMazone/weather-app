@@ -68,6 +68,8 @@
 ***
 ### Ngày 4.4/11: Thêm giao diện 5-day forecast
 ***
+### Ngay 5.5/11: Sua giao dien hourly forecast
+***
 
 **Tiếp theo**
 
