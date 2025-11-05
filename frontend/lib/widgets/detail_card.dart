@@ -1,4 +1,4 @@
-
+// lib/widgets/detail_card.dart
 import 'package:flutter/material.dart';
 import '../utils/weather_detail_type.dart';
 import '../painters/uv_circle_painter.dart';
@@ -30,14 +30,30 @@ class DetailCard extends StatelessWidget {
         color: Colors.white.withOpacity(0.22),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: Colors.white.withOpacity(0.4), width: 1.2),
-        boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 20, offset: Offset(0, 8))],
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 20,
+            offset: Offset(0, 8),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(color: Colors.white70, fontSize: 14)),
+          Text(
+            title,
+            style: const TextStyle(color: Colors.white70, fontSize: 14),
+          ),
           const SizedBox(height: 8),
-          Text(value, style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.w600)),
+          Text(
+            value,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 28,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           const SizedBox(height: 12),
           _buildDetailGraphic(),
         ],
@@ -48,47 +64,99 @@ class DetailCard extends StatelessWidget {
   Widget _buildDetailGraphic() {
     switch (type) {
       case WeatherDetailType.uv:
-        return SizedBox(height: 80, child: CustomPaint(painter: const UVCirclePainter(), child: const Center(child: Text('4', style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.w600)))));
+        final uvIndex = double.tryParse(extra) ?? 0.0;
+        return SizedBox(
+          height: 80,
+          child: CustomPaint(
+            painter: UVCirclePainter(uvIndex: uvIndex),
+            size: const Size(80, 80),
+          ),
+        );
+
       case WeatherDetailType.humidity:
-        return SizedBox(height: 80, child: CustomPaint(painter: const HumidityArcPainter(), child: const Center(child: Icon(Icons.water_drop, color: Colors.blue, size: 32))));
+        final humidityStr = value.replaceAll('%', '');
+        final humidity = (double.tryParse(humidityStr) ?? 0.0) / 100.0;
+        return SizedBox(
+          height: 80,
+          child: CustomPaint(
+            painter: HumidityArcPainter(humidity: humidity),
+            size: const Size(80, 80),
+          ),
+        );
+
       case WeatherDetailType.realFeel:
-        return const SizedBox(height: 80, child: CustomPaint(painter: RealFeelGaugePainter()));
+        final tempStr = value.replaceAll('°', '');
+        final realFeel = double.tryParse(tempStr) ?? 25.0;
+        return SizedBox(
+          height: 80,
+          child: CustomPaint(
+            painter: RealFeelGaugePainter(
+              realFeel: realFeel,
+              minTemp: 0,
+              maxTemp: 50,
+            ),
+            size: const Size(80, 80),
+          ),
+        );
+
       case WeatherDetailType.wind:
-        return const SizedBox(height: 80, child: CustomPaint(painter: WindCompassPainter()));
+        return SizedBox(
+          height: 80,
+          child: CustomPaint(
+            painter: const WindCompassPainter(),
+            size: const Size(80, 80),
+          ),
+        );
+
       case WeatherDetailType.sunset:
         return SizedBox(
           height: 80,
           child: CustomPaint(
             painter: const SunsetCurvePainter(),
+            size: const Size(80, 80),
             child: Padding(
               padding: const EdgeInsets.only(top: 55),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('05:57', style: TextStyle(color: Colors.white60, fontSize: 11)),
-                  Text('17:25', style: TextStyle(color: Colors.white60, fontSize: 11)),
+                  const Text(
+                    '05:57',
+                    style: TextStyle(color: Colors.white60, fontSize: 11),
+                  ),
+                  Text(
+                    extra.isNotEmpty ? extra : value,
+                    style: const TextStyle(color: Colors.white60, fontSize: 11),
+                  ),
                 ],
               ),
             ),
           ),
         );
+
       case WeatherDetailType.pressure:
         return SizedBox(
           height: 80,
           child: CustomPaint(
             painter: const PressureArcPainter(),
+            size: const Size(80, 80),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.arrow_upward, color: Colors.blue, size: 28),
+                  const Icon(Icons.arrow_downward, color: Colors.blue, size: 28),
                   const SizedBox(height: 4),
-                  Text(extra, style: const TextStyle(color: Colors.white70, fontSize: 12)),
+                  Text(
+                    extra,
+                    style: const TextStyle(color: Colors.white70, fontSize: 12),
+                  ),
                 ],
               ),
             ),
           ),
         );
+
+      default:
+        return const SizedBox.shrink();
     }
   }
 }
