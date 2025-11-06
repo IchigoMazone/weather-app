@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'screens/weather_home_screen.dart';
+import 'screens/splash_screen.dart'; 
 import 'services/theme_service.dart';
 import 'services/language_service.dart';
 import 'localization/app_localizations.dart';
@@ -48,7 +49,7 @@ class WeatherApp extends StatelessWidget {
               scaffoldBackgroundColor: Colors.black,
             ),
             themeMode: themeService.isDark ? ThemeMode.dark : ThemeMode.light,
-            home: const WeatherHomeScreen(),
+            home: const SplashScreen(), 
           );
         },
       ),

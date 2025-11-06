@@ -73,14 +73,12 @@
 ### Cập nhật sáu giao diện nhỏ nhóm painter 
 ***
 ### Ngay 6.6/11: Cập nhật language toàn hệ thống
-***
-**Tiếp theo**
 
-- Thêm trang giới thiệu nhóm ở giao diện app
-
+### Them giao dien gioi thieu nhom
 ***
 
 ##### Ngày khởi tạo : 22:00:00 23/10/2025.
+##### Ngay hoan thanh: 14:45:000 6/11/2025.
 
 
 
