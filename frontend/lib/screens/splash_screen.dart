@@ -1,4 +1,4 @@
-// lib/screens/splash_screen.dart
+
 import 'package:flutter/material.dart';
 import '../localization/app_localizations.dart';
 import 'weather_home_screen.dart';
@@ -58,8 +58,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
             Positioned.fill(
               child: Container(color: isDark ? Colors.black.withOpacity(0.08) : Colors.white.withOpacity(0.08)),
             ),
-
-            // ĐÁM MÂY
             Positioned(
               top: 80,
               left: 0,
@@ -70,8 +68,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                 ]),
               ),
             ),
-
-            // THÔNG TIN NHÓM – MÔN TÔ ĐẬM + BỎ NGÀY
             Positioned(
               top: 320,
               left: 0,
@@ -79,7 +75,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
               child: Center(
                 child: Column(
                   children: [
-                    // TÊN APP
                     Text(
                       loc.translate('app_name'),
                       style: const TextStyle(
@@ -153,8 +148,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
       ),
     );
   }
-
-  // DÒNG THƯỜNG (title + value)
   Widget _buildInfoRow(String titleKey, String subtitleKey, String titleValue, String subtitleValue) {
     final loc = AppLocalizations.of(context)!;
     return Padding(
@@ -172,8 +165,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
       ),
     );
   }
-
-  // DÒNG TÔ ĐẬM TOÀN BỘ (DÀNH CHO MÔN HỌC)
   Widget _buildBoldRow(String text) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
